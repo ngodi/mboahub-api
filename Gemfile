@@ -16,7 +16,8 @@ gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'jb', '~> 0.8.0'
-gem "jsonb_accessor"
+gem 'jsonb_accessor'
+gem 'jwt'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
