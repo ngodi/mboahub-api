@@ -1,5 +1,9 @@
 module V1
     class ApiController < ApplicationController
+        rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+        rescue_from ActiveRecord::RecordInvalid, with: :invalid_error
+        rescue_from ActiveRecord::Validations, with: :validation_error
+
         before_action :set_default_format
         before_action :authenticate_token!
 
@@ -20,6 +24,18 @@ module V1
 
         def auth_token
             @auth_token ||= request.headers['Authorization']&.split(' ')&.last
+        end
+
+        def invalid_error(e)
+            render json: { errors: [e.message] }, status: 422
+        end
+
+        def not_found_error
+            render json: {errors: ["Invalid email or password"]}, status: 404
+        end
+
+        def validation_error
+            render json: { errors: [@user.errors.full_messages] }, status: 409
         end
     end
 end

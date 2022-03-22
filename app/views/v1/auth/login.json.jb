@@ -1,3 +1,4 @@
-
-render('v1/users/token', token: @token)
+{
+    token: render('v1/users/token', token: @token)
+}
 

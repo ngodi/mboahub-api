@@ -3,7 +3,6 @@ user = house.user
 
 {
  id: house.id,
- user_id: house.user_id,
  listing_name: house.listing_name,
  summary: house.summary,
  home_type: house.home_type,
@@ -19,5 +18,7 @@ user = house.user
  },
  published_at: house.published_at,
  images: house_images.map(&:image_url),
- published_by: user.name
+ published_by: user.name,
+ house_count: user.house_count,
+ email: user.email
 }

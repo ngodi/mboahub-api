@@ -19,7 +19,7 @@ module V1
             end
 
             def index
-                @houses = @current_user.houses.includes(:house_images).all
+                @houses ||= @current_user.houses.includes(:house_images).all
             end
 
             private

@@ -23,4 +23,8 @@ class User < ApplicationRecord
         name = `${first_name} ${last_name}`
         @name ||= name.empty? ? email.split('@').first : name
       end
+
+      def house_count
+        @house_count ||= self.houses.count
+      end
 end

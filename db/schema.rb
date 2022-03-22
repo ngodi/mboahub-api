@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_182718) do
+ActiveRecord::Schema.define(version: 2022_04_25_135029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_182718) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["house_id"], name: "index_house_images_on_house_id"
+    t.index ["id"], name: "index_house_images_on_id", unique: true
   end
 
   create_table "houses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_182718) do
     t.jsonb "properties"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["id"], name: "index_houses_on_id", unique: true
     t.index ["listing_name", "user_id"], name: "index_houses_on_listing_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_houses_on_user_id"
   end
@@ -47,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_182718) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["id"], name: "index_users_on_id", unique: true
   end
 
   add_foreign_key "house_images", "houses"

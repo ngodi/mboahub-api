@@ -9,10 +9,12 @@ module Auth
 
         def authenticate!
             user = User.find_by!(email: email)
-            user.authenticate(password)
-            token = { token: JsonWebToken.encode(user_id: user.id)}
+            if user.authenticate(password)
+               token = JsonWebToken.encode(user_id: user.id)
 
-             return user, token
+             return token
+            end
+            false
         end
     end
 end
