@@ -1,4 +1,0 @@
-{
-    user: render('users/show', user: @user),
-    token: render('users/token', token: @token)
-}

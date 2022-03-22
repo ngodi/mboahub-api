@@ -8,14 +8,11 @@ module Auth
         end
 
         def authenticate!
-            user = User.find_by(email: email)
-            if user.authenticate(password)
-              token = { token: JsonWebToken.encode(user_id: user.id)}
+            user = User.find_by!(email: email)
+            user.authenticate(password)
+            token = { token: JsonWebToken.encode(user_id: user.id)}
 
              return user, token
-            else
-              user
-            end
         end
     end
 end

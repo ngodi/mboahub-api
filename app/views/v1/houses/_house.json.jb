@@ -1,0 +1,23 @@
+house_images = house.house_images
+user = house.user
+
+{
+ id: house.id,
+ user_id: house.user_id,
+ listing_name: house.listing_name,
+ summary: house.summary,
+ home_type: house.home_type,
+ cost: house.cost,
+ location: "#{house.city}, #{house.street}",
+ properties: {
+     num_bed_rooms: house.num_bed_rooms,
+     sitting_room: house.sitting_room,
+     parking: house.parking,
+     kitchen: house.kitchen,
+     fence: house.fence,
+     num_toilets: house.num_toilets
+ },
+ published_at: house.published_at,
+ images: house_images.map(&:image_url),
+ published_by: user.name
+}

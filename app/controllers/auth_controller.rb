@@ -12,15 +12,7 @@ class AuthController < ApiController
     end
 
     def signup
-      @user, @token = Auth::UserCreator.new(
-        first_name: params[:first_name],
-        last_name: params[:last_name],
-        email: params[:email],
-        password: params[:password],
-        password_confirmation: params[:password_confirmation],
-        city: params[:city],
-        street: params[:street],
-      ).create!
+      @user, @token = Auth::UserCreator.new(user_params: params[:user]).create!
 
      render json: { errors: [@user.errors.full_messages] } if @user.errors.any?
 
