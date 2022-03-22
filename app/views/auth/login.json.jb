@@ -1,3 +1,0 @@
-
-render('users/token', token: @token)
-

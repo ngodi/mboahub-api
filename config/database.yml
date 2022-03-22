@@ -83,4 +83,5 @@ production:
   <<: *default
   database: my_house_api_production
   username: my_house_api
-  password: <%= ENV['MY_HOUSE_API_DATABASE_PASSWORD'] %>
+  password: my_house_api
+  #<%= ENV['MY_HOUSE_API_DATABASE_PASSWORD'] %>

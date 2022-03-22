@@ -1,17 +1,9 @@
 module Auth
     class UserCreator
-        attr_reader :first_name, :last_name, :email, :password, :password_confirmation, :city, :street
+        attr_reader :user_params
 
-        def initialize(first_name:, last_name:, email:, password:, password_confirmation:, city:, street:)
-           @user = User.new(
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation,
-            city: city,
-            street: street,
-           )
+        def initialize(user_params:)
+           @user = User.new(user_params);
         end
 
         def create!

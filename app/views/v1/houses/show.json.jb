@@ -1,0 +1,3 @@
+{
+  house: render('v1/houses/house', house: @house),
+}

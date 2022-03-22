@@ -10,19 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_051822) do
+ActiveRecord::Schema.define(version: 2022_03_29_182718) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
+  create_table "house_images", force: :cascade do |t|
+    t.uuid "house_id", null: false
+    t.string "image_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["house_id"], name: "index_house_images_on_house_id"
+  end
+
+  create_table "houses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "listing_name", null: false
+    t.string "summary"
+    t.string "home_type", null: false
+    t.string "cost", null: false
+    t.jsonb "location", null: false
+    t.jsonb "properties"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["listing_name", "user_id"], name: "index_houses_on_listing_name_and_user_id", unique: true
+    t.index ["user_id"], name: "index_houses_on_user_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
     t.string "email", null: false
     t.string "password_digest", null: false
     t.jsonb "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "house_images", "houses"
+  add_foreign_key "houses", "users"
 end
