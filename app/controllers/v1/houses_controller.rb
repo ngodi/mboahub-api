@@ -1,7 +1,7 @@
 module V1
     class HousesController < ApiController
         skip_before_action :authenticate_token!
-
+      
         def show
             @house ||= House.includes(:house_images).find(params[:id])
         end

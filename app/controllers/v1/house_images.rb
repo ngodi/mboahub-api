@@ -1,0 +1,3 @@
+class HouseImages < ApiController
+
+end
