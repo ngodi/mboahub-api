@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     post :login, to: "auth#login"
     post :logout, to: "auth#logout"
 
+    namespace :my do
+      resources :houses
+    end
     resources :houses
   end
 end

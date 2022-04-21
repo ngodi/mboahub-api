@@ -9,9 +9,11 @@ module Houses
         end
 
         def create!
-          user.houses.create!(house_params).tap do |house|
-            images && images.map do |image|
-                HouseImages.create!(image_url: image, house_id: house.id)
+          ActiveRecord::Base.transaction do
+            user.houses.create!(house_params).tap do |house|
+              images && images.map do |image|
+                  HouseImage.create!(image_url: image, house_id: house.id)
+              end
             end
           end
         end

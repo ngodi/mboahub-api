@@ -1,4 +1,5 @@
 house_images = house.house_images
+user = house.user
 
 {
  id: house.id,
@@ -18,4 +19,5 @@ house_images = house.house_images
  },
  published_at: house.published_at,
  images: house_images.map(&:image_url),
+ published_by: user.name
 }

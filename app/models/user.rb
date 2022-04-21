@@ -18,4 +18,9 @@ class User < ApplicationRecord
         last_name ||= ''
         address ||= ''
       end
+
+      def name
+        name = `${first_name} ${last_name}`
+        @name ||= name.empty? ? email.split('@').first : name
+      end
 end
