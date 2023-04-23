@@ -1,3 +1,3 @@
-class HouseImages < ApiController
+class V1::HouseImages < ApiController
 
 end
