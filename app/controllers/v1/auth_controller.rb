@@ -3,23 +3,19 @@ module V1
     skip_before_action :authenticate_token!
 
     def login
-      @token = Auth::UserAuthenticator.new(
-        email: params[:email],
-        password: params[:password]
-      ).authenticate!
+      @token = Auth::UserAuthenticator.new(email: params[:email], password: params[:password]).authenticate!
 
+      return render_422_response(Struct.new(:errors).new('Invalid password')) if @token == false
 
-    raise ActiveRecord::RecordNotFound if !@token
-
-      return @token
+      @token
     end
 
     def signup
-      @user = Auth::UserCreator.new(
-        user_params: user_params,
-      ).create!
+      @token, @user = Auth::UserCreator.new(user_params: user_params).create!
 
-      @user
+      return render_422_response(@user) if @user.nil?
+
+      [@token, @user]
     end
 
     def logout
@@ -28,13 +24,14 @@ module V1
     end
 
     def home
-      render json: "Welcome"
+      render json: 'Welcome'
     end
 
     private
 
     def user_params
-      params.require(:auth).permit(:first_name, :last_name, :email, :password, :password_confirmation, address: [:city, :street])
+      params.require(:auth).permit(:first_name, :last_name, :email, :password, :password_confirmation,
+                                   address: %i[city street])
     end
   end
 end
