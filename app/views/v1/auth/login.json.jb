@@ -1,4 +1,3 @@
 {
-    token: render('v1/users/token', token: @token)
+  data: render('v1/users/token', token: @token), success: true, status: :ok
 }
-

@@ -1,16 +1,16 @@
 class JsonWebToken
-   SECRET_KEY = ENV['SECRET_KEY_BASE']
+  SECRET_KEY = ENV.fetch('SECRET_KEY_BASE', nil)
 
-    def self.encode(payload)
-        JWT.encode(payload, SECRET_KEY)
-    end
+  def self.encode(payload)
+    JWT.encode(payload, SECRET_KEY)
+  end
 
-    def self.decode(token)
-        decoded = JWT.decode(token, SECRET_KEY)[0]
-        HashWithIndifferentAccess.new(decoded)
-    end
+  def self.decode(token)
+    decoded = JWT.decode(token, SECRET_KEY)[0]
+    HashWithIndifferentAccess.new(decoded)
+  end
 
-    def self.destroy(token)
-        token = nil
-    end
+  def self.destroy(_token)
+    nil
+  end
 end
