@@ -3,11 +3,11 @@ module V1
     skip_before_action :authenticate_token!
 
     def show
-      @show ||= House.includes(:house_images).find(params[:id])
+      @house = House.includes(:house_images).find(params[:id])
     end
 
     def index
-      @index ||= House.includes(:house_images).all
+      @houses = House.includes(:house_images).all
     end
   end
 end
