@@ -7,7 +7,7 @@ module V1
     end
 
     def index
-      @houses = House.includes(:house_images).all
+      @houses = House.includes(:house_images).limit(params[:limit].to_i).offset(params[:page].to_i * params[:limit].to_i)
     end
   end
 end

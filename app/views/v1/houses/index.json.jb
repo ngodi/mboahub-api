@@ -1,1 +1,5 @@
-render partial: 'v1/houses/house', collection: @houses, as: :house
+
+{
+  data:{ num_houses: House.count, houses: @houses.map { |house| render('v1/houses/house', house: house) }},
+  success: true
+}
