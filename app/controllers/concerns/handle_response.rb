@@ -20,8 +20,8 @@ module HandleResponse
     render(json: { data: response, success: success }, status: status)
   end
 
-  def invalid_error(err)
-    render json: { errors: [err.message], success: false }, status: 422
+  def invalid_error(_err)
+    render json: { errors: [''], success: false }, status: 422
   end
 
   def not_found_error

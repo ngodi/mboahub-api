@@ -2,9 +2,14 @@ class House < ApplicationRecord
   belongs_to :user
   has_many :house_images
 
+  validates :listing_name, presence: true
+
   jsonb_accessor :location,
                  city: :string,
-                 street: :string
+                 street: :string,
+                 country: :string,
+                 lat: :string,
+                 lng: :string
 
   jsonb_accessor :properties,
                  num_bed_rooms: :integer,

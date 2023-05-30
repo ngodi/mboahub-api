@@ -2,10 +2,11 @@ module V1
   class ApiController < ApplicationController
     include HandleResponse
     include HandlePagination
-    
+
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
     rescue_from ActiveRecord::RecordInvalid, with: :invalid_error
     rescue_from ActiveRecord::Validations, with: :validation_error
+    rescue_from ActiveRecord::NotNullViolation, with: :invalid_error
 
     before_action :set_default_format
     before_action :authenticate_token!
