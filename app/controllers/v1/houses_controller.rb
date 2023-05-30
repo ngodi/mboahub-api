@@ -7,7 +7,12 @@ module V1
     end
 
     def index
-      @houses = House.includes(:house_images).all
+      limit = params[:limit] || 6
+      page = params[:page] || 0
+      @houses = House
+        .includes(:house_images)
+        .limit(limit.to_i)
+        .offset((page.to_i * limit.to_i)).order(created_at: :desc)
     end
   end
 end
