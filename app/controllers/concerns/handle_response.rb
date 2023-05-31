@@ -5,8 +5,8 @@ module HandleResponse
     render_response({ errors: error.message }, 404)
   end
 
-  def render_422_response(payload)
-    render_response({ errors: payload&.errors }, 422)
+  def render_422_response(resource)
+    render_response({ errors: resource&.errors }, 422)
   end
 
   def render_400_response(errors)
@@ -20,15 +20,15 @@ module HandleResponse
     render(json: { data: response, success: success }, status: status)
   end
 
-  def invalid_error(_err)
-    render json: { errors: [''], success: false }, status: 422
+  def invalid_error(err)
+    render json: { errors: [err], success: false }, status: 422
   end
 
   def not_found_error
     render json: { errors: ['Invalid email or password'], success: false }, status: 404
   end
 
-  def validation_error
-    render json: { errors: [@user.errors.full_messages] }, status: 409
+  def validation_error(resource)
+    render json: { errors: [resource.errors.full_messages] }, status: 409
   end
 end
