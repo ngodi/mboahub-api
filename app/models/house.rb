@@ -2,7 +2,7 @@ class House < ApplicationRecord
   belongs_to :user
   has_many :house_images
 
-  validates :listing_name, presence: true
+  validates :listing_name, presence: true, uniqueness: { case_sensetive: false }
 
   jsonb_accessor :location,
                  city: :string,

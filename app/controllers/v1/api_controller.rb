@@ -7,6 +7,7 @@ module V1
     rescue_from ActiveRecord::RecordInvalid, with: :invalid_error
     rescue_from ActiveRecord::Validations, with: :validation_error
     rescue_from ActiveRecord::NotNullViolation, with: :invalid_error
+    rescue_from ActiveRecord::RecordNotUnique, with: :validation_error
 
     before_action :set_default_format
     before_action :authenticate_token!
