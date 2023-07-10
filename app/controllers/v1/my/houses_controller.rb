@@ -23,8 +23,18 @@ module V1
           :summary,
           :home_type,
           :cost,
-          location: %i[city street country lat lng],
-          properties: %i[num_bed_rooms sitting_room parking kitchen fence num_toilets]
+          :city,
+          :street,
+          :country,
+          :lat, 
+          :lng,
+          :num_bed_rooms,
+          :sitting_room,
+          :parking,
+          :kitchen,
+          :fence,
+          :num_toilets,
+          :business_type
         )
       end
     end

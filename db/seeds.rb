@@ -29,14 +29,14 @@ users = User.all
       summary: summary, 
       home_type: home_type, 
       cost: cost, 
-      city: city, 
-      street: street, 
+      business_type: ['for_sale', 'for_rent'].sample,
       num_bed_rooms: num_bed_rooms, 
       sitting_room: sitting_room, 
       kitchen: kitchen, 
       fence: fence, 
       num_toilets: num_toilets
       ).tap do |house|
+        house.address.create!(city: city, street: street)
       3.times do
         HouseImage.create!(image_url: Faker::LoremFlickr.image, house_id: house.id)
       end

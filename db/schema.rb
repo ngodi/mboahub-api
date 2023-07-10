@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_25_135029) do
+ActiveRecord::Schema.define(version: 2023_07_10_104639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,12 +31,22 @@ ActiveRecord::Schema.define(version: 2022_04_25_135029) do
     t.string "summary"
     t.string "home_type", null: false
     t.string "cost", null: false
-    t.jsonb "location", null: false
-    t.jsonb "properties"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "business_type"
+    t.jsonb "location"
+    t.string "street", null: false
+    t.string "country", null: false
+    t.string "city", null: false
+    t.integer "lat"
+    t.integer "lng"
+    t.integer "num_bed_rooms"
+    t.integer "sitting_room"
+    t.integer "kitchen"
+    t.boolean "fence"
+    t.boolean "parking"
+    t.integer "num_toilets"
     t.index ["id"], name: "index_houses_on_id", unique: true
-    t.index ["listing_name", "user_id"], name: "index_houses_on_listing_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_houses_on_user_id"
   end
 
