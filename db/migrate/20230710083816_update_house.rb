@@ -3,8 +3,8 @@ class UpdateHouse < ActiveRecord::Migration[6.1]
     add_column :houses, :street, :string, null: false
     add_column :houses, :country, :string, null: false
     add_column :houses, :city, :string, null: false
-    add_column :houses, :lat, :integer
-    add_column :houses, :lng, :integer
+    add_column :houses, :lat, :float
+    add_column :houses, :lng, :float
     remove_column :houses, :properties, :jsonb
     add_column :houses, :num_bed_rooms, :integer
     add_column :houses, :sitting_room, :integer

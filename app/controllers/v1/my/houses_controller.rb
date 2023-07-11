@@ -26,7 +26,7 @@ module V1
           :city,
           :street,
           :country,
-          :lat, 
+          :lat,
           :lng,
           :num_bed_rooms,
           :sitting_room,

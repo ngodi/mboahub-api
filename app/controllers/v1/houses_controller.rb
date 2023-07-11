@@ -7,20 +7,34 @@ module V1
     end
 
     def index
-      limit = params[:limit] || 6
-      page = params[:page] || 0
-      listing_name = params[:listingName]
-      location = params[:location]
-      business_type = params[:businessType]
-
       @houses = House.includes(:house_images)
-        .limit(limit.to_i)
-        .offset((page.to_i * limit.to_i)).order(created_at: :desc)
+        .limit(house_params[:limit])
+        .offset((house_params[:page] * house_params[:limit])).order(created_at: :desc)
 
-      @houses = @houses.where('listing_name like ?', listing_name) if listing_name
-      @houses = @houses.where('location like ?', location) if location
-     
-      @houses = @houses.where('business_type like ?', business_type) if business_type
+      if house_params[:listing_name]
+        @houses = @houses.where('lower(listing_name) like ?',
+                                "%#{house_params[:listing_name]}%")
+      end
+      if house_params[:location]
+        @houses = @houses.where('lower(city) like ? OR lower(street) like ? OR lower(country) like ?', "%#{house_params[:location]}%",
+                                "%#{house_params[:location]}%", "%#{house_params[:location]}%")
+      end
+      return unless house_params[:business_type]
+
+      @houses = @houses.where('lower(business_type) like ?',
+                              "%#{house_params[:business_type]}%")
+    end
+
+    private
+
+    def house_params
+      {
+        limit: params[:limit].to_i || 6,
+        page: params[:page].to_i || 0,
+        listing_name: params[:listingName]&.downcase,
+        location: params[:location]&.downcase,
+        business_type: params[:businessType]&.downcase
+      }
     end
   end
 end

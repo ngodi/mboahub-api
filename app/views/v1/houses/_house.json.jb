@@ -19,6 +19,7 @@ user = house.user
     num_toilets: house.num_toilets
   },
   published_at: house.published_at,
+  business_type: house.business_type,
   images: house_images.map(&:image_url),
   published_by: user.name,
   house_count: user.house_count,

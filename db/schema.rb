@@ -34,12 +34,11 @@ ActiveRecord::Schema.define(version: 2023_07_10_104639) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "business_type"
-    t.jsonb "location"
     t.string "street", null: false
     t.string "country", null: false
     t.string "city", null: false
-    t.integer "lat"
-    t.integer "lng"
+    t.float "lat"
+    t.float "lng"
     t.integer "num_bed_rooms"
     t.integer "sitting_room"
     t.integer "kitchen"
