@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
     namespace :my do
       resources :houses
+      get "/details", to: "details#index"
+      put "/details", to: "details#update"
+      put "/password", to: "password#update"
     end
     resources :houses
   end

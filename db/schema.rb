@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_10_104639) do
+ActiveRecord::Schema.define(version: 2023_07_14_050303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.float "lat"
+    t.float "lng"
+    t.integer "addressable_id"
+    t.string "addressable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "house_images", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "house_id", null: false
@@ -54,9 +67,16 @@ ActiveRecord::Schema.define(version: 2023_07_10_104639) do
     t.string "last_name"
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.jsonb "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image_url"
+    t.string "image_cover_url"
+    t.string "agency"
+    t.text "about"
+    t.integer "phone"
+    t.string "facebook_url"
+    t.string "twitter_url"
+    t.string "instagram_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["id"], name: "index_users_on_id", unique: true
   end

@@ -1,0 +1,17 @@
+{
+  id: user.id,
+  email: user.email,
+  first_name: user.first_name,
+  last_name: user.last_name,
+  image_url: user.image_url,
+  image_cover_url: user.image_cover_url,
+  agency: user.agency,
+  about: user.about,
+  phone: user.phone,
+  facebook_url: user.facebook_url,
+  twitter_url: user.twitter_url,
+  instagram_url: user.instagram_url,
+  city: address_data&.city,
+  street: address_data&.street,
+  country: address_data&.country
+}
