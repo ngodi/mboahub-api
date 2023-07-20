@@ -13,5 +13,8 @@ Rails.application.routes.draw do
       put "/password", to: "password#update"
     end
     resources :houses
+    resources :messages do
+      get "/exchanged_users", to: "messages#exchanged_users", on: :collection
+    end
   end
 end

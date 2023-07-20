@@ -21,7 +21,11 @@ user = house.user
   published_at: house.published_at,
   business_type: house.business_type,
   images: house_images.map(&:image_url),
-  published_by: user.name,
-  house_count: user.house_count,
-  email: user.email
+  user: {
+    published_by: user.name,
+    house_count: user.house_count,
+    email: user.email,
+    phone: user.phone,
+    avatar: user.image_url,
+  }
 }

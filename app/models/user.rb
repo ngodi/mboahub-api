@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :houses
   has_many :addresses, as: :addressable, dependent: :destroy
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
+  has_many :received_messages, class_name: "Message", foreign_key: "receiver_id"
 
   after_initialize :init
 
@@ -18,6 +20,12 @@ class User < ApplicationRecord
 
   def house_count
     @house_count ||= houses.count
+  end
+
+  def exchanged_users
+    User.joins("JOIN messages ON (users.id = messages.sender_id OR users.id = messages.receiver_id)")
+        .where("users.id != ? AND (messages.sender_id = ? OR messages.receiver_id = ?)", id, id, id)
+        .distinct
   end
 
   private
