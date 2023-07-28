@@ -14,10 +14,10 @@ Welcome to the Mboahub Real Estate Marketplace Backend API! This API serves as t
 
 ## Prerequisites
 
-- Ruby [version]
-- Rails [version]
-- PostgreSQL [version]
-- Bundler [version]
+- Ruby 3.0.3
+- Rails 7.0.1
+- PostgreSQL
+- Bundler
 
 ## Installation
 
