@@ -10,11 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_25_135029) do
+ActiveRecord::Schema.define(version: 2023_07_20_102304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.float "lat"
+    t.float "lng"
+    t.integer "addressable_id"
+    t.string "addressable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "anonymous_messages", force: :cascade do |t|
+    t.string "sender_email"
+    t.string "sender_phone"
+    t.string "sender_name"
+    t.uuid "house_id", null: false
+    t.uuid "receiver_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["house_id"], name: "index_anonymous_messages_on_house_id"
+    t.index ["receiver_id"], name: "index_anonymous_messages_on_receiver_id"
+  end
 
   create_table "house_images", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "house_id", null: false
@@ -31,13 +57,32 @@ ActiveRecord::Schema.define(version: 2022_04_25_135029) do
     t.string "summary"
     t.string "home_type", null: false
     t.string "cost", null: false
-    t.jsonb "location", null: false
-    t.jsonb "properties"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "business_type"
+    t.string "street", null: false
+    t.string "country", null: false
+    t.string "city", null: false
+    t.float "lat"
+    t.float "lng"
+    t.integer "num_bed_rooms"
+    t.integer "sitting_room"
+    t.integer "kitchen"
+    t.boolean "fence"
+    t.boolean "parking"
+    t.integer "num_toilets"
     t.index ["id"], name: "index_houses_on_id", unique: true
-    t.index ["listing_name", "user_id"], name: "index_houses_on_listing_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_houses_on_user_id"
+  end
+
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "content"
+    t.uuid "sender_id"
+    t.uuid "receiver_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -45,13 +90,24 @@ ActiveRecord::Schema.define(version: 2022_04_25_135029) do
     t.string "last_name"
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.jsonb "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image_url"
+    t.string "image_cover_url"
+    t.string "agency"
+    t.text "about"
+    t.integer "phone"
+    t.string "facebook_url"
+    t.string "twitter_url"
+    t.string "instagram_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["id"], name: "index_users_on_id", unique: true
   end
 
+  add_foreign_key "anonymous_messages", "houses"
+  add_foreign_key "anonymous_messages", "users", column: "receiver_id"
   add_foreign_key "house_images", "houses"
   add_foreign_key "houses", "users"
+  add_foreign_key "messages", "users", column: "receiver_id"
+  add_foreign_key "messages", "users", column: "sender_id"
 end

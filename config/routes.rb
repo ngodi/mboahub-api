@@ -8,7 +8,14 @@ Rails.application.routes.draw do
 
     namespace :my do
       resources :houses
+      get "/details", to: "details#index"
+      put "/details", to: "details#update"
+      put "/password", to: "password#update"
     end
     resources :houses
+    resources :messages do
+      get "/exchanged_users", to: "messages#exchanged_users", on: :collection
+      post "/anonymous_create", to: "messages#anonymous_create", on: :collection
+    end
   end
 end

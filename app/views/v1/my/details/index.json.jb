@@ -1,0 +1,4 @@
+{
+  data: render('v1/my/details/user', user: @current_user,
+                                     address_data: @current_user.addresses.first), success: true, status: :ok
+}

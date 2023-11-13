@@ -6,8 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-houses = House.all
-users = User.all
+users = (1..5).to_a.map do |n| 
+  User.create!(email: "test_user#{n}@gmail.com", 
+                password: '12345678',
+                first_name: "test#{n}",
+                last_name: "user#{n}", 
+                image_url: Faker::Avatar.image(slug: "my-own-slug", size: "50x50", format: "jpg"),
+                image_cover_url: Faker::Avatar.image(slug: "my-own-slug", size: "50x50", format: "jpg"),
+                about: Faker::Lorem.paragraph,
+                phone: Faker::PhoneNumber.cell_phone_with_country_code
+    ).tap do |user|
+      user.addresses.create!(
+        street: Faker::Address.street_address,
+        city: Faker::Address.city,
+        state: Faker::Address.state,
+        country: Faker::Address.country 
+      )
+    end
+end
 
 30.times do 
   user = users.sample
@@ -16,6 +32,7 @@ users = User.all
   home_type = ['apartment', 'studio', 'room'].sample
   cost = 10000
   city = Faker::Address.city
+  country = Faker::Address.country
   street = Faker::Address.street_address
   num_bed_rooms = [1, 2, 3].sample
   sitting_room = [1, 2, 3].sample
@@ -29,10 +46,12 @@ users = User.all
       summary: summary, 
       home_type: home_type, 
       cost: cost, 
-      city: city, 
-      street: street, 
+      business_type: ['for_sale', 'for_rent'].sample,
       num_bed_rooms: num_bed_rooms, 
       sitting_room: sitting_room, 
+      city: city,
+      country: country,
+      street: street,
       kitchen: kitchen, 
       fence: fence, 
       num_toilets: num_toilets
