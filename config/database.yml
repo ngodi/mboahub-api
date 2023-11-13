@@ -79,6 +79,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  <<: *default
   database: postgres://mboahub_user:kgbUkSYT3vcEEgnMhCe5reWVG2aFKz8r@dpg-cl97u7to7jlc739oseeg-a/mboahub
   username: mboahub_user
   password: kgbUkSYT3vcEEgnMhCe5reWVG2aFKz8r
