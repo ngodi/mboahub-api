@@ -1,5 +1,3 @@
-# rubocop:disable Style/CyclomaticComplexity
-
 module V1
   class HousesController < ApiController
     skip_before_action :authenticate_token!
@@ -8,7 +6,11 @@ module V1
       @house = House.includes(:house_images).find(params[:id])
     end
 
+    # rubocop:disable Style/PerceivedComplexity
+    # rubocop:disable Style/CyclomaticComplexity
     def index
+      # rubocop:enable Style/CyclomaticComplexity
+      # rubocop:enable Style/PerceivedComplexity
       @houses = Houses::HousesFilter.new(
         {
           listing_name: params[:listingName]&.downcase,
