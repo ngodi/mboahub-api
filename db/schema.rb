@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_17_120719) do
+ActiveRecord::Schema.define(version: 2023_07_20_102304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 2023_07_17_120719) do
     t.string "addressable_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "anonymous_messages", force: :cascade do |t|
+    t.string "sender_email"
+    t.string "sender_phone"
+    t.string "sender_name"
+    t.uuid "house_id", null: false
+    t.uuid "receiver_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["house_id"], name: "index_anonymous_messages_on_house_id"
+    t.index ["receiver_id"], name: "index_anonymous_messages_on_receiver_id"
   end
 
   create_table "house_images", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -91,6 +104,8 @@ ActiveRecord::Schema.define(version: 2023_07_17_120719) do
     t.index ["id"], name: "index_users_on_id", unique: true
   end
 
+  add_foreign_key "anonymous_messages", "houses"
+  add_foreign_key "anonymous_messages", "users", column: "receiver_id"
   add_foreign_key "house_images", "houses"
   add_foreign_key "houses", "users"
   add_foreign_key "messages", "users", column: "receiver_id"

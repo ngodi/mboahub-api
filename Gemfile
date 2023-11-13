@@ -26,8 +26,8 @@ gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem 'rack-cors'
 gem 'pry-rails'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,3 +56,11 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "redis", "~> 5.0"
+
+gem "sentry-ruby", "~> 5.12"
+
+gem "sentry-rails", "~> 5.12"

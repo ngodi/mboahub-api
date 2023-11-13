@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :houses
     resources :messages do
       get "/exchanged_users", to: "messages#exchanged_users", on: :collection
+      post "/anonymous_create", to: "messages#anonymous_create", on: :collection
     end
   end
 end
