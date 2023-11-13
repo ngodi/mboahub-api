@@ -14,13 +14,14 @@ module V1
       @exchanged_users = @current_user.exchanged_users
       render json: @exchanged_users
     end
-  
+
     def index
       sent_messages = Message.where(sender_id: @current_user.id)
       received_messages = Message.where(receiver_id: @current_user.id)
       anonymous_messages = AnonymousMessage.where(receiver_id: @current_user.id)
-  
-      @messages = { sent_messages: sent_messages, received_messages: received_messages, anonymous_messages: anonymous_messages }
+
+      @messages = { sent_messages: sent_messages, received_messages: received_messages,
+                    anonymous_messages: anonymous_messages }
     end
   end
 end
