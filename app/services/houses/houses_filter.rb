@@ -1,5 +1,3 @@
-# rubocop:disable Style/CyclomaticComplexity
-
 module Houses
   class HousesFilter
     def initialize(payload = nil)
@@ -9,7 +7,9 @@ module Houses
       @payload = payload
     end
 
+    # rubocop:disable Style/CyclomaticComplexity
     def filter
+      # rubocop:enable Style/CyclomaticComplexity
       @houses = filter_by('listing_name') if @payload[:listing_name]
       @houses = filter_by('city') if @payload[:city]
       @houses = filter_by('street') if @payload[:street]
