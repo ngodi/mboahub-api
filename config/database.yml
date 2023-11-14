@@ -80,7 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: postgres://mboahub_user:kgbUkSYT3vcEEgnMhCe5reWVG2aFKz8r@dpg-cl97u7to7jlc739oseeg-a.oregon-postgres.render.com/mboahub
+  url: postgres://mboahub_user:kgbUkSYT3vcEEgnMhCe5reWVG2aFKz8r@dpg-cl97u7to7jlc739oseeg-a/mboahub
+  database: dpg-cl97u7to7jlc739oseeg-a
   username: mboahub_user
   password: kgbUkSYT3vcEEgnMhCe5reWVG2aFKz8r
   port: 5432
