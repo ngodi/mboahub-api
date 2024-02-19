@@ -1,0 +1,5 @@
+cloud_name: myplaceimages
+  api_key: "452917566896553"
+  api_secret: "Fsten6vuaz9s-jVuBKhevIqXMb8"
+  enhance_image_tag: true
+  static_file_support: false

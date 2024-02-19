@@ -20,14 +20,26 @@ gem 'jb', '~> 0.8.0'
 gem 'jsonb_accessor'
 gem 'jwt'
 
+gem 'cloudinary'
+gem 'countries'
+gem 'country_select'
+gem 'dotenv'
+gem 'geocoder'
+
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'formtastic'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'pry-rails'
 gem 'rack-cors'
+
+gem 'activeadmin'
+gem 'devise'
+gem 'sass-rails'
+gem 'sprockets', '<4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -40,6 +52,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'figaro'
   gem 'pry', '~> 0.13.1'
+  gem 'pundit'
   gem 'rspec-rails', '~> 5.0.0'
 end
 

@@ -34,7 +34,10 @@ module V1
           :kitchen,
           :fence,
           :num_toilets,
-          :business_type
+          :business_type,
+          :total_area,
+          :dimensions,
+          :has_title
         )
       end
     end

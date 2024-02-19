@@ -11,9 +11,9 @@ module Auth
       user = User.find_by!(email: email)
 
       if user.authenticate(password)
-        token = JsonWebToken.encode(user_id: user.id)
+        access_token = AccessToken.create(user_id: user.id)
 
-        return { token: token }
+        return { token: access_token.token }
       end
 
       false

@@ -8,6 +8,12 @@ AllCops:
     - "Rakefile"
     - "node_modules/**/*"
 
+  SuggestExtensions: false
+
+  require:
+    - rubocop-rails
+    - rubocop-rspec
+
   DisplayCopNames: true
 
 Layout/LineLength:

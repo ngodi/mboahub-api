@@ -9,7 +9,7 @@ module Auth
     def create!
       user = User.create!(user_params)
 
-      token = JsonWebToken.encode(user_id: user.id) if user
+      token = AccessToken.create!(user_id: user.id) if user
 
       [token, user]
     end
