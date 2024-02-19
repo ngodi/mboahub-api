@@ -1,4 +1,4 @@
-class ApiController < ApplicationController
+class ApiController < ActionController::API
   before_action :set_default_format
   before_action :authenticate_token!
 
@@ -9,15 +9,16 @@ class ApiController < ApplicationController
   end
 
   def authenticate_token!
-    payload = JsonWebToken.decode(auth_token)
-    @current_user = User.find(payload['user_id'])
-  rescue JWT::ExpiredSignature
-    render json: { errors: ['Auth token has expired'] }, status: :unauthorized
-  rescue JWT::DecodeError
-    render json: { errors: ['Invalid auth token'] }, status: :unauthorized
+    user_token = AccessToken.find_by!(token: auth_token)
+
+    if user_token
+      @current_user = user_token.user
+    else
+      render json: { error: 'user not authorized' }, status: :unauthorized
+    end
   end
 
   def auth_token
-    @auth_token ||= requestheaders.fetch('Authorization', '').split.last
+    request.headers['Authorization']&.split(' ')&.last
   end
 end

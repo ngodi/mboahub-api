@@ -25,6 +25,8 @@ users = (1..5).to_a.map do |n|
     end
 end
 
+users[0].update!(role: 'admin')
+
 30.times do 
   user = users.sample
   listing_name = Faker::Name.unique.name
@@ -61,4 +63,4 @@ end
       end
     end
   end
-end
+endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
