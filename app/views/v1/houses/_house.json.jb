@@ -1,4 +1,4 @@
-house_images = house.house_images
+h_images = house.images
 user = house.user
 
 {
@@ -20,7 +20,7 @@ user = house.user
   },
   published_at: house.published_at,
   business_type: house.business_type,
-  images: house_images.map(&:image_url),
+  images: h_images&.map { |image| image.url },
   user: {
     id: user.id,
     published_by: user.name,

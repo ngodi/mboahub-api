@@ -1,7 +1,7 @@
 module Houses
   class HousesFilter
     def initialize(payload = nil)
-      @houses = House.includes(:house_images)
+      @houses = House
         .limit(payload[:limit])
         .offset((payload[:page].to_i * payload[:limit].to_i)).order(created_at: :desc)
       @payload = payload

@@ -17,25 +17,17 @@ module V1
 
     private
 
-    def handle_server_error
-      render json: { success: false, error: 'a server error occured, try again' }, status: :server_error
-    end
-
-    def handle_unauthorized
-      render json: { success: false, error: 'user not unauthorized' }, status: :unauthorized
-    end
-
     def set_default_format
       request.format = :json
     end
 
     def authenticate_token!
-      user_token = AccessToken.find_by!(token: auth_token)
+      user_token = AccessToken.find_by(token: auth_token)
 
       if user_token
         @current_user = user_token.user
       else
-        render json: { error: 'user not authorized' }, status: :unauthorized
+        handle_unauthorized
       end
     end
 

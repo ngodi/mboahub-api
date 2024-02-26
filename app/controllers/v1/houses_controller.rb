@@ -3,7 +3,7 @@ module V1
     skip_before_action :authenticate_token!
 
     def show
-      @house = House.includes(:house_images).find(params[:id])
+      @house = House.find(params[:id])
     end
 
     # rubocop:disable Style/PerceivedComplexity

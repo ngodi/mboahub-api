@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+admin = AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') # if Rails.env.development?
+
 users = (1..5).to_a.map do |n| 
   User.create!(email: "test_user#{n}@gmail.com", 
                 password: '12345678',
@@ -44,6 +46,7 @@ users[0].update!(role: 'admin')
 
   ActiveRecord::Base.transaction do
     user.houses.create!(
+      admin_user: admin,
       listing_name: listing_name, 
       summary: summary, 
       home_type: home_type, 
@@ -59,8 +62,9 @@ users[0].update!(role: 'admin')
       num_toilets: num_toilets
       ).tap do |house|
       3.times do
-        HouseImage.create!(image_url: Faker::LoremFlickr.image, house_id: house.id)
+        # HouseImage.create!(image_url: Faker::LoremFlickr.image, house_id: house.id)
+        # house.images.attach(io: URI.open(Faker::LoremFlickr.image), filename: Faker::LoremFlickr.image)
       end
     end
   end
-endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+end

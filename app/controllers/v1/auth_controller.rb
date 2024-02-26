@@ -1,6 +1,6 @@
 module V1
   class AuthController < ApiController
-    skip_before_action :authenticate_token!, except: :signup
+    skip_before_action :authenticate_token!, except: :logout
 
     def login
       @token = Auth::UserAuthenticator.new(email: params[:email], password: params[:password]).authenticate!
@@ -11,7 +11,6 @@ module V1
     end
 
     def signup
-      CanCreateUser.new(@current_user).authorize!
       @token, @user = Auth::UserCreator.new(user_params: user_params).create!
 
       return render_422_response(@user) if @user.nil?
@@ -30,7 +29,7 @@ module V1
     private
 
     def user_params
-      params.require(:auth).permit(:first_name, :last_name, :email, :password, :password_confirmation,
+      params.require(:auth).permit(:first_name, :role, :last_name, :email, :password, :password_confirmation,
                                    address: %i[city street])
     end
   end

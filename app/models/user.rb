@@ -10,11 +10,11 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  ADMIN = 'admin'
-  AGENT = 'agent'
-  GUEST = 'guest'
+  AGENT = 'agent'.freeze
+  OWNER = 'owner'.freeze
+  TENANT_OR_BUYER = 'tenant_or_buyer'.freeze # also called buyer
 
-  enum role: { admin: ADMIN, agent: AGENT, guest: GUEST }.freeze
+  enum role: { AGENT: 'agent', OWNER: 'owner', TENANT_OR_BUYER: 'tenant_or_buyer' }.freeze
 
   VALID_EMAIL_REGEX = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*
                        [A-Za-z0-9]+@((\w+-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i

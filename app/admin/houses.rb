@@ -62,17 +62,17 @@ ActiveAdmin.register House do
     end
 
     def default_lat
-      geocode&.first&.data['lat'].to_f
+      geocode&.first&.data['lat'].to_f || 1.02
     end
 
     def default_lng
-      geocode&.first&.data['lon'].to_f
+      geocode&.first&.data['lon'].to_f || 1.02
     end
 
     def geocode
       Geocoder.configure(timeout: 1000)
 
-      @geocode ||= Geocoder.search(@city)
+      Geocoder.search(@city)
     end
 
     private

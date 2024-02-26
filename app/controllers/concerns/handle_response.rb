@@ -9,6 +9,14 @@ module HandleResponse
     render_response({ errors: resource&.errors }, 422)
   end
 
+  def handle_server_error
+    render json: { success: false, error: 'a server error occured, try again' }, status: :server_error
+  end
+
+  def handle_unauthorized
+    render json: { success: false, error: 'user not unauthorized' }, status: :unauthorized
+  end
+
   def render_400_response(errors)
     render_response({ errors: errors }, 400)
   end
@@ -29,6 +37,6 @@ module HandleResponse
   end
 
   def validation_error(resource)
-    render json: { errors: [resource.errors.full_messages] }, status: 409
+    render json: { errors: [resource.message] }, status: 409
   end
 end

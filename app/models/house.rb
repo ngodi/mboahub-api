@@ -3,6 +3,8 @@ class House < ApplicationRecord
   belongs_to :admin_user
   has_many_attached :images
 
+  validates_presence_of :listing_name, :summary, :home_type, :cost, :city, :num_bed_rooms, :business_type
+
   BUSINESS_TYPE = { for_sale: 'for_sale', for_rent: 'for_rent' }.freeze
   enum business_type: BUSINESS_TYPE
 

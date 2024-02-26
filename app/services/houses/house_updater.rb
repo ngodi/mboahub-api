@@ -9,11 +9,7 @@ module Houses
     end
 
     def update!
-      House.update!(user_id: user.id).merge(house_params).tap do |house|
-        images&.map do |image|
-          HouseImages.update!(image_url: image, house_id: house.id)
-        end
-      end
+      House.update!(user_id: user.id).merge(house_params)
     end
   end
 end
